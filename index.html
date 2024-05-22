@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dowry Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-image: url('image1.jpg'); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('image2.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            z-index: 1;
+            border-radius: 8px;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>Dowry Calculator</h1>
+            <div class="form-group">
+                <label for="income">Boy's Income (Monthly):</label>
+                <input type="number" id="income" placeholder="Enter income">
+            </div>
+            <div class="form-group">
+                <label for="property">Family Property Value:</label>
+                <input type="number" id="property" placeholder="Enter property value">
+            </div>
+            <div class="form-group">
+                <label for="boyEducation">Boy's Education Level:</label>
+                <select id="boyEducation">
+                    <option value="none">None</option>
+                    <option value="highschool">High School</option>
+                    <option value="bachelor">Bachelor's Degree</option>
+                    <option value="master">Master's Degree</option>
+                    <option value="phd">PhD</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="boyJob">Boy's Job Status:</label>
+                <select id="boyJob">
+                    <option value="unemployed">Unemployed</option>
+                    <option value="part-time">Part-time</option>
+                    <option value="full-time">Full-time</option>
+                    <option value="government">Government</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="boyLooks">Boy's Looks:</label>
+                <select id="boyLooks">
+                    <option value="below average">Below Average</option>
+                    <option value="average">Average</option>
+                    <option value="beautiful">Beautiful</option>
+                    <option value="extremely beautiful">Extremely Beautiful</option>
+                    <option value="crush">Crush</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="girlEducation">Girl's Education Level:</label>
+                <select id="girlEducation">
+                    <option value="none">None</option>
+                    <option value="highschool">High School</option>
+                    <option value="bachelor">Bachelor's Degree</option>
+                    <option value="master">Master's Degree</option>
+                    <option value="phd">PhD</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="girlJob">Girl's Job Status:</label>
+                <select id="girlJob">
+                    <option value="unemployed">Unemployed</option>
+                    <option value="part-time">Part-time</option>
+                    <option value="full-time">Full-time</option>
+                    <option value="government">Government</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="girlLooks">Girl's Looks:</label>
+                <select id="girlLooks">
+                    <option value="below average">Below Average</option>
+                    <option value="average">Average</option>
+                    <option value="beautiful">Beautiful</option>
+                    <option value="extremely beautiful">Extremely Beautiful</option>
+                    <option value="crush">Crush</option>
+                </select>
+            </div>
+            <button onclick="calculateDowry()">Calculate Dowry</button>
+            <div id="result"></div>
+        </div>
+    </div>
+    <script>
+        function calculateDowry() {
+            var income = parseFloat(document.getElementById('income').value);
+            var property = parseFloat(document.getElementById('property').value);
+            var boyEducation = document.getElementById('boyEducation').value;
+            var boyJob = document.getElementById('boyJob').value;
+            var boyLooks = document.getElementById('boyLooks').value;
+            var girlEducation = document.getElementById('girlEducation').value;
+            var girlJob = document.getElementById('girlJob').value;
+            var girlLooks = document.getElementById('girlLooks').value;
+
+            if (isNaN(income)) income = 0;
+            if (isNaN(property)) property = 0;
+
+            // Base dowry calculation
+            var dowry = income * 12 * 0.1 + property * 0.2;
+
+            // Adjustment based on boy's education level
+            switch (boyEducation) {
+                case 'highschool':
+                    dowry += 1000;
+                    break;
+                case 'bachelor':
+                    dowry += 20000;
+                    break;
+                case 'master':
+                    dowry += 25000;
+                    break;
+                case 'phd':
+                    dowry += 25000;
+                    break;
+            }
+
+            // Adjustment based on boy's job status
+            switch (boyJob) {
+                case 'unemployed':
+                    dowry -= 1000;
+                    break;
+                case 'part-time':
+                    dowry -= 5000;
+                    break;
+                case 'full-time':
+                    dowry += 5000;
+                    break;
+                case 'government':
+                    dowry += 10000;
+                    break;
+            }
+
+            // Adjustment based on boy's looks
+            switch (boyLooks) {
+                case 'below average':
+                    dowry -= 2000;
+                    break;
+                case 'average':
+                    break;
+                case 'beautiful':
+                    dowry += 2000;
+                    break;
+                case 'extremely beautiful':
+                    dowry += 3000;
+                    break;
+                case 'crush':
+                    dowry += 5000;
+                    break;
+            }
+
+            // Adjustment based on girl's education level
+            switch (girlEducation) {
+                case 'highschool':
+                    dowry -= 1000;
+                    break;
+                case 'bachelor':
+                    dowry -= 2000;
+                    break;
+                case 'master':
+                    dowry -= 3000;
+                    break;
+                case 'phd':
+                    dowry -= 5000;
+                    break;
+            }
+
+            // Adjustment based on girl's job status
+            switch (girlJob) {
+                case 'unemployed':
+                    dowry += 100;
+                    break;
+                case 'part-time':
+                    dowry += 5000;
+                    break;
+                case 'full-time':
+                    dowry -= 10000;
+                    break;
+                case 'government':
+                    dowry -= 50000;
+                    break;
+            }
+
+            // Adjustment based on girl's looks
+            switch (girlLooks) {
+                case 'below average':
+                    dowry += 10000;
+                    break;
+                case 'average':
+                    break;
+                case 'beautiful':
+                    dowry -= 10000;
+                    break;
+                case 'extremely beautiful':
+                    dowry -= 30000;
+                    break;
+                case 'crush':
+                    dowry -= 50000;
+                    break;
+            }
+
+            var resultElement = document.getElementById('result');
+            resultElement.innerHTML = "Recommended Dowry: Rupees = " + dowry.toFixed(2);
+        }
+    </script>
+</body>
+</html>
